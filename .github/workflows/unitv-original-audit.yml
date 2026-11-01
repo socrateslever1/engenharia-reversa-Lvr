@@ -1,0 +1,31 @@
+name: UniTVnet original - ferramentas de auditoria
+on:
+  push:
+    paths:
+      - 'projetos/unitv-original/**'
+      - '.github/workflows/unitv-original-audit.yml'
+  pull_request:
+    paths:
+      - 'projetos/unitv-original/**'
+      - '.github/workflows/unitv-original-audit.yml'
+permissions:
+  contents: read
+jobs:
+  parser-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projetos/unitv-original
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Validar sintaxe e testes sem APK proprietário
+        run: |
+          python -m compileall -q tools
+          python -m unittest discover -s tools/tests -v
+      - name: Não gerar APK fictício
+        run: |
+          test ! -d app
+          echo "Auditoria estática apenas; nenhum aplicativo UniTVnet foi recompilado."
