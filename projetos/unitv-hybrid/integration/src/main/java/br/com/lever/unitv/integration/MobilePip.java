@@ -42,7 +42,7 @@ public final class MobilePip {
     /** Chamar em Activity.onUserLeaveHint apenas em Android 8 a 11. */
     public boolean onUserLeaveHint() {
         if (Build.VERSION.SDK_INT < 26 || Build.VERSION.SDK_INT >= 31 || !eligible()) return false;
-        try { return activity.enterPictureInPictureMode(); }
+        try { activity.enterPictureInPictureMode(); return true; }
         catch (IllegalStateException | UnsupportedOperationException ignored) { return false; }
     }
 }
