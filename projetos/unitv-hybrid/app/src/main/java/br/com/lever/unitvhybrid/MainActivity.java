@@ -184,7 +184,7 @@ public final class MainActivity extends Activity {
     private Button button(String label, LinearLayout parent) {
         Button b = new Button(this);
         b.setText(label);
-        b.setTextAllCaps(false);
+        b.setAllCaps(false);
         b.setTextColor(Color.WHITE);
         b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         b.setFocusable(true);

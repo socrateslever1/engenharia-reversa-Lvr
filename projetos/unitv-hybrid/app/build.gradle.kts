@@ -21,6 +21,7 @@ android {
 }
 dependencies {
     implementation(project(":integration"))
+    implementation("androidx.annotation:annotation:1.9.1")
     implementation("androidx.media3:media3-exoplayer:1.8.0")
     implementation("androidx.media3:media3-exoplayer-hls:1.8.0")
     implementation("androidx.media3:media3-ui:1.8.0")
