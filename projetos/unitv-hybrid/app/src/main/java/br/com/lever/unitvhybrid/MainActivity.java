@@ -231,7 +231,7 @@ public final class MainActivity extends Activity {
             playerView.getGlobalVisibleRect(source);
             pip.update(player.getVideoSize().width, player.getVideoSize().height, source);
             if (Build.VERSION.SDK_INT >= 26) {
-                if (!enterPictureInPictureMode()) setStatus("O Android não permitiu entrar no PiP.");
+                enterPictureInPictureMode();
             }
         } catch (RuntimeException error) {
             setStatus("O modo PiP não está disponível neste dispositivo.");
