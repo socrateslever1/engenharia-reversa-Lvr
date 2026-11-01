@@ -4,4 +4,4 @@ dependencyResolutionManagement {
     repositories { google(); mavenCentral() }
 }
 rootProject.name = "UniTV-Hybrid-Integrations"
-include(":integration")
+include(":integration", ":app")

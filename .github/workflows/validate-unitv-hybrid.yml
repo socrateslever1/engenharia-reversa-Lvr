@@ -13,7 +13,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: projetos/unitv-hybrid
@@ -23,7 +23,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - name: Instalar SDK Android 35 usando ferramentas do runner
+      - name: SDK Android 35
         shell: bash
         run: |
           set -euo pipefail
@@ -33,10 +33,17 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.11.1'
-      - name: Testes do inventário estático
+      - name: Testar inventário
         run: python -m unittest discover -s tools/tests -v
-      - name: Testes Android e AAR
-        run: gradle --no-daemon :integration:testDebugUnitTest :integration:assembleDebug
+      - name: Testar bibliotecas e compilar APK
+        run: gradle --no-daemon :integration:testDebugUnitTest :app:testDebugUnitTest :app:assembleDebug :integration:assembleDebug
+      - name: Preservar artefatos Android
+        uses: actions/upload-artifact@v4
+        with:
+          name: unitv-hybrid-alpha-apk
+          path: projetos/unitv-hybrid/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 30
       - uses: actions/upload-artifact@v4
         with:
           name: unitv-integration-aar
