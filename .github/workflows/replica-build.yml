@@ -1,0 +1,32 @@
+name: UniTVnet Replica - Android build and tests
+on:
+  push:
+    branches: ['replica/unitvnet-from-zero']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.11.1'
+      - name: Tests and compile UI only
+        working-directory: projetos/unitv-replica
+        run: gradle --no-daemon :app:testDebugUnitTest :app:assembleDebug
+      - name: APK must not expose original brand or network access
+        working-directory: projetos/unitv-replica
+        run: |
+          ! grep -q 'android.permission.INTERNET' app/src/main/AndroidManifest.xml
+          ! grep -q 'com.unitvnet' app/build.gradle
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lvr-replica-navigation-only-not-unitvnet
+          path: projetos/unitv-replica/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error

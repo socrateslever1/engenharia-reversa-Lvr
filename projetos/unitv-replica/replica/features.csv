@@ -1,0 +1,18 @@
+feature,area,priority,original,clone,notes
+Identificar modo TV por UiModeManager e Leanback,plataforma,must,yes,yes,Teste de decisão local; não validado em aparelho
+Alternância manual TV Mobile,plataforma,must,no,no,Requisito novo; será pontuado separadamente como extra
+Barra inferior Início TV Novidades Perfil,interface,must,yes,partial,Abas executam navegação local sem dados
+Abas Recomendações Filmes Séries Animes,interface,must,yes,partial,Troca seleção sem carregar conteúdos
+Barra superior com pesquisa e filtro,interface,must,yes,partial,Painel visual apenas; busca desativada por ausência de catálogo
+Carrossel de recomendações,conteudo,must,yes,no,Não usar posters sem licença ou dados inventados
+Lista de transmissões ao vivo,conteudo,must,yes,no,Sem fonte autorizada
+Lista de jogos e agenda esportiva,conteudo,must,yes,no,Sem fonte autorizada
+Catálogo completo filmes séries animes,conteudo,must,yes,no,Sem fonte autorizada
+Autenticação com conta original,conta,must,yes,no,Sem API autorizada
+Favoritos e histórico reais,conta,must,yes,no,Sem integração autorizada
+Player de vídeos com sessão real,player,must,yes,no,Sem integração autorizada
+Legendas e controles do player,player,must,yes,no,Sem integração autorizada
+Navegação e foco Android TV,plataforma,must,yes,partial,Views focáveis não validadas em aparelho
+PiP integrado ao player real,melhorias,should,no,no,Exige player real antes
+MediaSession ligado à reprodução real,melhorias,should,no,no,Exige player real antes
+Watch Next Android TV,melhorias,should,no,no,Exige player real e conteúdo autorizado
